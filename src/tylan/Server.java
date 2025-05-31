@@ -13,10 +13,21 @@ public class Server{
     static Socket communicationSocket;
 
     public static void main(String[] args) throws IOException {
-        System.out.println("The server is running");
+        System.out.println("Server is waiting for connection...");
         listeningSocket = new ServerSocket(port);
         communicationSocket = listeningSocket.accept();
+        System.out.println("Client connected");
         out = new PrintWriter(communicationSocket.getOutputStream(), true);
+        out.println("Hello client");
         in = new BufferedReader(new InputStreamReader(communicationSocket.getInputStream()));
+
+        communicationSocket.close();
+        listeningSocket.close();
+
+        /*
+        killing port if already in use error occurs:
+        lsof -i :5000
+        kill -9 <pid>
+         */
     }
 }
