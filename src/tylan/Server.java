@@ -18,8 +18,16 @@ public class Server{
         listeningSocket = new ServerSocket(port);
         communicationSocket = listeningSocket.accept();
         System.out.println("Client connected");
+
+
+
         out = new PrintWriter(communicationSocket.getOutputStream(), true);
-        out.println("Hello client");
+        out.println("Welcome to the Mini Calculator App! Let's do some quick math.");
+
+
+        while (true) {
+            out.println();
+        }
         in = new BufferedReader(new InputStreamReader(communicationSocket.getInputStream()));
         String clientResponse = in.readLine();
         System.out.println(clientResponse);
@@ -31,5 +39,9 @@ public class Server{
         lsof -i :5000
         kill -9 <pid>
          */
+    }
+
+    public int verifyNumber(String number){
+
     }
 }
