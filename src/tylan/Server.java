@@ -1,6 +1,7 @@
 package tylan;
 
 
+import java.awt.*;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -20,7 +21,8 @@ public class Server{
         out = new PrintWriter(communicationSocket.getOutputStream(), true);
         out.println("Hello client");
         in = new BufferedReader(new InputStreamReader(communicationSocket.getInputStream()));
-
+        String clientResponse = in.readLine();
+        System.out.println(clientResponse);
         communicationSocket.close();
         listeningSocket.close();
 
