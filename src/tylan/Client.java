@@ -24,15 +24,27 @@ public class Client {
          */
 
         while (true){
-            String serverResponse = in.readLine();//this is how we go about formatting the "in" better
-            System.out.println("SERVER SAYS: " + serverResponse);
+            String serverResponse;
+            while ((serverResponse = in.readLine()) != null &&
+                    !serverResponse.startsWith("choose") &&
+                    !serverResponse.startsWith("Please enter")){
+                System.out.println("SERVER SAYs: " + serverResponse);
+            }
+
+            if (serverResponse != null) {
+                System.out.println("SERVER RESPONSE: " + serverResponse);
+            }
+
             String response = keyboard.readLine();
             out.println(response);
-            if (response.equals("quit")){
+            if(response.equals("quit")){
                 break;
             }
 
         }
+
+
+
         //and now we can print it appropriately
 
         in.close();

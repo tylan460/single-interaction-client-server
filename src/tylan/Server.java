@@ -29,10 +29,19 @@ public class Server {
         do {
             out.println("choose a valid operator, options : [+, -, *, /]");
             clientResponse = verifyOperator(in.readLine());
+            System.out.println("Client says: " + clientResponse);
             if (clientResponse.equals("Invalid operator")){
                 out.println("Invalid operator detected.");
             }
         }while (verifyOperator(clientResponse).equals("Invalid operator"));
+
+        String operator = clientResponse;
+
+
+
+
+
+
 
 
 
@@ -72,7 +81,7 @@ public class Server {
 
 
         for (String theOperator : operators) {
-            if (operator == theOperator) {
+            if (operator.equals(theOperator)) {
                 found = true;
                 break;
             }
