@@ -28,8 +28,13 @@ public class Server {
         String clientResponse;
         do {
             out.println("choose a valid operator, options : [+, -, *, /]");
-            clientResponse = in.readLine();
-        }while (verifyOperator(clientResponse).equals("Invalid Operator"));
+            clientResponse = verifyOperator(in.readLine());
+            if (clientResponse.equals("Invalid operator")){
+                out.println("Invalid operator detected.");
+            }
+        }while (verifyOperator(clientResponse).equals("Invalid operator"));
+
+
 
 
 

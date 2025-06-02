@@ -15,18 +15,29 @@ public class Client {
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
+        BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
+
         /*
         so doing the following won't actually work :
         System.out.println(in);
         It'll only print a hash key to the console
          */
 
-        String serverResponse = in.readLine();//this is how we go about formatting the "in" better
-        out.println("Hello server");
+        while (true){
+            String serverResponse = in.readLine();//this is how we go about formatting the "in" better
+            System.out.println("SERVER SAYS: " + serverResponse);
+            String response = keyboard.readLine();
+            out.println(response);
+            if (response.equals("quit")){
+                break;
+            }
 
-        System.out.println(serverResponse);//and now we can print it appropriately
+        }
+        //and now we can print it appropriately
 
         in.close();
+        out.close();
+        keyboard.close();
 
 
     }
