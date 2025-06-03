@@ -28,11 +28,11 @@ public class Client {
             while ((serverResponse = in.readLine()) != null &&
                     !serverResponse.startsWith("choose") &&
                     !serverResponse.startsWith("Please enter")){
-                System.out.println("SERVER SAYs: " + serverResponse);
+                System.out.println("SERVER SAYS: " + serverResponse);
             }
 
             if (serverResponse != null) {
-                System.out.println("SERVER RESPONSE: " + serverResponse);
+                System.out.println("SERVER SAYS: " + serverResponse);
             }
 
             String response = keyboard.readLine();

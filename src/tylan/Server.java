@@ -29,7 +29,7 @@ public class Server {
         do {
             out.println("choose a valid operator, options : [+, -, *, /]");
             clientResponse = verifyOperator(in.readLine());
-            System.out.println("Client says: " + clientResponse);
+            System.out.println("Client response: " + clientResponse);
             if (clientResponse.equals("Invalid operator")){
                 out.println("Invalid operator detected.");
             }
@@ -37,9 +37,15 @@ public class Server {
 
         String operator = clientResponse;
 
+        out.println("Please enter your first number");
+        int firstNum = verifyNumber(communicationSocket);
 
+        out.println("Please enter your second number");
+        int secondNum = verifyNumber(communicationSocket);
 
+        int final_Answer = performCalculation(operator, firstNum, secondNum);
 
+        out.println(firstNum + " " + operator + " " + secondNum + " " + "= " + final_Answer);
 
 
 
@@ -59,20 +65,27 @@ public class Server {
          */
     }
 
-    public static int verifyNumber(String numString, Socket socket) throws IOException {
+    public static int verifyNumber(Socket socket) throws IOException {
         int number;
-        while (true) {
 
-            PrintWriter response = new PrintWriter(socket.getOutputStream(), true);
+        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        PrintWriter response = new PrintWriter(socket.getOutputStream(), true);
+        while (true) {
+            String numString = in.readLine();
             try {
+
                 number = Integer.parseInt(numString);
                 break;
+
             } catch (NumberFormatException e) {
                 response.println("Please enter a valid number!");
             }
-        }
 
+        }
         return number;
+
+
+
     }
 
     public static String verifyOperator(String operator) {
@@ -91,6 +104,24 @@ public class Server {
         }
         else {
             return "Invalid operator";
+        }
+    }
+
+    public static int performCalculation(String operator, int num1, int num2){
+
+        switch (operator){
+            case "+":
+                return num1 + num2;
+            case "-":
+                return num1 - num2;
+            case "*":
+                return num1 * num2;
+            case "/":
+                return num1 / num2;
+            default:
+                return -1;
+
+
         }
     }
 }
